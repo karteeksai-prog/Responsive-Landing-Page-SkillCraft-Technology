@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Landing Page</title>
+
+  <style>
+    /* ====== GLOBAL RESET ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth; /* smooth section scrolling */
+    }
+
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* ====== NAVBAR ====== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: #111;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      padding: 15px 25px;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar a:hover {
+      color: #04AA6D;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+    }
+
+    .navbar a.active {
+      color: #04AA6D;
+      font-weight: bold;
+    }
+
+    /* ====== SECTIONS ====== */
+    section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 20px;
+      text-align: center;
+      transition: background-color 0.5s ease;
+    }
+
+    #home {
+      background: linear-gradient(135deg, #a8edea, #fed6e3);
+    }
+
+    #features {
+      background: linear-gradient(135deg, #d4fc79, #96e6a1);
+    }
+
+    #contact {
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+    }
+
+    section h1, section h2 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    section p {
+      max-width: 600px;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    /* ====== BUTTON STYLE ====== */
+    .btn {
+      margin-top: 20px;
+      background: #04AA6D;
+      color: #fff;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      background: #028a57;
+      transform: scale(1.05);
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+      }
+      .navbar a {
+        flex: 1 1 100%;
+        text-align: center;
+        padding: 12px;
+        font-size: 16px;
+      }
+      section h1, section h2 {
+        font-size: 2.2rem;
+      }
+      section p {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ====== NAVBAR ====== -->
+  <nav class="navbar" id="navbar">
+    <a href="#home" class="active">Home</a>
+    <a href="#features">Features</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- ====== SECTIONS ====== -->
+  <section id="home">
+    <h1>Welcome to My Site</h1>
+    <p>This is the home section of the landing page. Scroll down or use the navigation to explore more!</p>
+    <button class="btn">Learn More</button>
+  </section>
+
+  <section id="features">
+    <h2>Our Features</h2>
+    <p>We provide high-quality, responsive designs that adapt perfectly to any screen size. Beautiful, functional, and easy to use.</p>
+    <button class="btn">Explore Features</button>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>We’d love to hear from you! Reach out to us for collaborations or support. Let’s build something amazing together.</p>
+    <button class="btn">Get in Touch</button>
+  </section>
+
+  <script>
+    // ====== NAVBAR SCROLL EFFECT ======
+    const navbar = document.getElementById("navbar");
+    const links = document.querySelectorAll(".navbar a");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+
+      // Highlight active link while scrolling
+      let current = "";
+      document.querySelectorAll("section").forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (scrollY >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      links.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${current}`) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
